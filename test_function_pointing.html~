@@ -20,7 +20,6 @@
 				this.print123 = "print this.";
 				alert("ghalo");
 				var self = this;
-				function_name(self);
 				alert("ghalo4");
 			},
 			callMe2: function(self) {
