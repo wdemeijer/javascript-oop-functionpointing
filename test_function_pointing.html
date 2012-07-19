@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="jquery-1.7.1.js"></script>
+	<script src="js/jquery.ba-bbq.js"></script>
+	<script> 
+		function anObject() {
+		}
+		anObject.prototype.constructor = anObject;
+		anObject.prototype = {
+			init: function() {
+				this.callMe();
+			},
+			callMe: function() {
+				var self = this;
+				this.callYouBack(self, self.callMe2, self.callMe4);
+			},
+			callYouBack: function(self, function_name, function_name2) {
+				this.print123 = "print this.";
+				alert("ghalo");
+				function_name(self.callMe3, function_name2);
+				alert("ghalo4");
+			},
+			callMe2: function(function_name, function_name2) {
+				alert("callMe2");
+				function_name2();
+			},
+			callMe3: function(function_name) {
+				alert("callMe3");
+				function_name();
+			},
+			callMe4: function() {
+				alert("callMe4");
+			}
+		}
+		
+		var thisObject = new anObject();
+		thisObject.init();
+	</script>
+</head>
+<body>
+</body>
+</html>
+
