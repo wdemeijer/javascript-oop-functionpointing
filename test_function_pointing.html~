@@ -6,32 +6,34 @@
 	<script src="js/jquery.ba-bbq.js"></script>
 	<script> 
 		function anObject() {
+			this.counter = 0;
 		}
 		anObject.prototype.constructor = anObject;
 		anObject.prototype = {
 			init: function() {
-				this.callMe();
-			},
-			callMe: function() {
+			
 				var self = this;
-				self.callYouBack(self, self.callMe2);
+			
+				var function_pointer = function() {self.some_function()};
+				alert("Trying to call some_function from init");
+				this.counter++;
+				alert("init: Counter is now at: " + this.counter);
+				function_pointer();
+				alert("Done calling from Init!");
+				this.counter++;
+				this.call_this_function(function() {self.some_function()});
 			},
-			callYouBack: function(self, function_name, function_name2) {
-				this.print123 = "print this.";
-				alert("ghalo");
-				var self = this;
-				alert("ghalo4");
-			},
-			callMe2: function(self) {
+			call_this_function: function(function_pointer) {
+				alert("Trying to call some_function from call_this_function");
+				alert("call_this_function: Counter is now at: " + this.counter);
+				function_pointer();
+				alert("Done calling from call_this_function!");
 				
-				alert(self.print123);
+				
 			},
-			callMe3: function(function_name) {
-				alert("callMe3");
-				function_name();
-			},
-			callMe4: function() {
-				alert(this.print123);
+			some_function: function() {
+				alert("some_function got called.");
+				alert("some_function: Counter is now at: " + this.counter);
 			}
 		}
 		
